@@ -12,7 +12,7 @@ struct GNG3DList
     void* ptr;
 };
 
-#define GNG3DLIST_INIT(head)      (head)->next = (head); (head)->prev = (head); (head)->ptr = 13;
+#define GNG3DLIST_INIT(head)      (head)->next = (head); (head)->prev = (head); (head)->ptr = NULL;
 #define GNG3DLIST_EMPTY(head)     ((head)->next == (head) && (head)->prev == (head))
 #define GNG3DLIST_NOT_EMPTY(head) !GNG3DLIST_EMPTY(head)
 #define GNG3DLIST_FIRST(head)     ((head)->next)

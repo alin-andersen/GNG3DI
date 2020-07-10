@@ -3,7 +3,7 @@
 GNG3DInputMesh::GNG3DInputMesh(aiMesh* mesh)
 {
     this->mesh = mesh;
-    this->vertices = malloc(sizeof(struct Vec3) * mesh->mNumVertices);
+    this->vertices = (Vec3*)malloc(sizeof(struct Vec3) * mesh->mNumVertices);
     this->vertices_count = mesh->mNumVertices;
 
     for(int i = 0; i < mesh->mNumVertices; i++)

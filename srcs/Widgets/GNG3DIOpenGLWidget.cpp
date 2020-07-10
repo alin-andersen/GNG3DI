@@ -8,7 +8,7 @@
 #include <QtGlobal>
 #include <QStyleOption>
 
-char* load_file(char* path, off_t* size)
+char* load_file(const char* path, off_t* size)
 {
     FILE* file = fopen(path, "r");
     if(file == NULL) return NULL;
@@ -580,7 +580,7 @@ void GNG3DIOpenGLWidget::LoadVertices(struct Vec3* vertices, int len, struct GNG
     if(!gl) return;
 
     if(node_types != NULL) free(node_types);
-    node_types = malloc(sizeof(GLfloat) * len);
+    node_types = (GLfloat*)malloc(sizeof(GLfloat) * len);
 
     float v_min = FLT_MAX;
     float v_max = FLT_MIN;
@@ -660,10 +660,10 @@ void GNG3DIOpenGLWidget::LoadEdges(struct EdgeInfo* edges, int count)
     if(!gl) return;
 
     if(_edges != NULL) free(_edges);
-    _edges = malloc(sizeof(struct Vec3) * count);
+    _edges = (Vec3*)malloc(sizeof(struct Vec3) * count);
 
     if(edge_ages != NULL) free(edge_ages);
-    edge_ages = malloc(sizeof(GLfloat) * count);
+    edge_ages = (GLfloat*)malloc(sizeof(GLfloat) * count);
 
     float depth_min_value = INT_MAX;
     float depth_max_value = INT_MIN;

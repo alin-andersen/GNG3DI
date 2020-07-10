@@ -43,7 +43,7 @@ public:
 
     Assimp::Importer importer;
     Assimp::Exporter exporter;
-    aiScene* scene = NULL;
+    const aiScene* scene = NULL;
 
     GNG3DInputMesh*      imesh = NULL;
     GNG3DSimplifiedMesh* smesh = NULL;
