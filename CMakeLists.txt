@@ -11,7 +11,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 # Add a compiler flags.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wl,-rpath='${ORIGIN}'")
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets)
 
@@ -44,10 +44,20 @@ target_link_libraries(gng3di Qt5::Widgets ${AssimpLibrary})
 
 if(UNIX)
 
-  add_custom_target(
-    CopyLibraries
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/assimp/linux/libs/libassimp.so ${CMAKE_BINARY_DIR}
-    )
+  add_custom_command(
+    TARGET gng3di POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+      ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/assimp/linux/libs/libassimp.so
+      ${CMAKE_CURRENT_BINARY_DIR}/libassimp.so.5)
+
+  add_custom_command(
+    TARGET gng3di POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+      ${CMAKE_CURRENT_SOURCE_DIR}/srcs/edge.fsh
+      ${CMAKE_CURRENT_SOURCE_DIR}/srcs/edge.vsh
+      ${CMAKE_CURRENT_SOURCE_DIR}/srcs/node.fsh
+      ${CMAKE_CURRENT_SOURCE_DIR}/srcs/node.vsh
+      ${CMAKE_CURRENT_BINARY_DIR}/)
 
 endif(UNIX)
 
